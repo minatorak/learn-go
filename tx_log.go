@@ -85,7 +85,7 @@ func (l *PostgresTransactionLogger) ReadEvent() (<-chan Event, <-chan error) {
 		rows, err := l.db.Query(query)
 
 		if err != nil {
-			outError <- fmt.Errorf("sql error :%w", &err)
+			outError <- fmt.Errorf("sql error :%w", err)
 			return
 		}
 
