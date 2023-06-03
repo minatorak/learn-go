@@ -5,8 +5,16 @@ import (
 )
 
 func main() {
-	myChannel := make(chan string)
-	anotherChannel := make(chan string)
+	start := true
+	for start {
+		start = !test()
+	}
+}
+
+func test() bool {
+	finit := false
+	myChannel := make(chan string, 1)
+	anotherChannel := make(chan string, 1)
 
 	go func() {
 		myChannel <- "cat"
@@ -17,9 +25,10 @@ func main() {
 
 	select {
 	case msgFromMyChannel := <-myChannel:
+		finit = true
 		fmt.Println(msgFromMyChannel)
 	case msgFromAnotherChannel := <-anotherChannel:
 		fmt.Println(msgFromAnotherChannel)
 	}
-
+	return finit
 }
