@@ -1,16 +1,25 @@
 go run concurrency/con.go
 
 // result
-dataTest
+cow
+cow
+☁  learn-go [concurrency] ⚡  go run concurrency/con.go
+cow
+☁  learn-go [concurrency] ⚡  go run concurrency/con.go
+cat
+☁  learn-go [concurrency] ⚡  go run concurrency/con.go
 
 stard @main
-fork gorountine to child
-@main wait vale from channel or channel close
-child work
-gorountine send "dataTest" to channel
-msg recived data
-print msg
+make 2 channel
+send 2 goroutine to @child
+wait 1 of 2 channel send data
+@child work
+print
 end @main
 
 Channels
 FIFO
+
+select statement
+The select statement lets a goroutine wait on multiple communication operations.
+A select blocks until one of its cases can run, then it executes that case. It chooses one at random if multiple are ready.

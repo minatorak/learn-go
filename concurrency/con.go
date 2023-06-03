@@ -5,15 +5,21 @@ import (
 )
 
 func main() {
-	myChannel := make(chan string) // make channel and data flow in channel is string
+	myChannel := make(chan string)
+	anotherChannel := make(chan string)
 
-	go func() { // gorountine
-		myChannel <- "dataTest" // send "dataTest" to channel
+	go func() {
+		myChannel <- "cat"
+	}()
+	go func() {
+		anotherChannel <- "cow"
 	}()
 
-	msg := <-myChannel // blocking line of code @main
-	// for read data from channel close or recived data from channel
-
-	fmt.Println(msg)
+	select {
+	case msgFromMyChannel := <-myChannel:
+		fmt.Println(msgFromMyChannel)
+	case msgFromAnotherChannel := <-anotherChannel:
+		fmt.Println(msgFromAnotherChannel)
+	}
 
 }
