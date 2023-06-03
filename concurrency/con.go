@@ -2,33 +2,26 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
-	start := true
-	for start {
-		start = !test()
-	}
-}
-
-func test() bool {
-	finit := false
-	myChannel := make(chan string, 1)
-	anotherChannel := make(chan string, 1)
+	unbufferedChannel := make(chan string)
+	chars := []string{"a", "b", "c"}
 
 	go func() {
-		myChannel <- "cat"
-	}()
-	go func() {
-		anotherChannel <- "cow"
+		for _, c := range chars {
+			fmt.Println("goroutine sender ", c)
+			unbufferedChannel <- c
+		}
 	}()
 
-	select {
-	case msgFromMyChannel := <-myChannel:
-		finit = true
-		fmt.Println(msgFromMyChannel)
-	case msgFromAnotherChannel := <-anotherChannel:
-		fmt.Println(msgFromAnotherChannel)
+	n := len(chars)
+	for n >= 1 {
+		time.Sleep(time.Second * 1)
+		fmt.Println("start receive")
+		receive := <-unbufferedChannel
+		fmt.Println("receive ", receive)
+		n -= 1
 	}
-	return finit
 }

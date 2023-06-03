@@ -1,20 +1,25 @@
 go run concurrency/con.go
 
 // result
-cow
-cow
-☁  learn-go [concurrency] ⚡  go run concurrency/con.go
-cow
-☁  learn-go [concurrency] ⚡  go run concurrency/con.go
-cat
-☁  learn-go [concurrency] ⚡  go run concurrency/con.go
+goroutine sender  a
+start recive
+recive  a
+goroutine sender  b
+start recive
+recive  b
+goroutine sender  c
+start recive
+recive  c
 
 stard @main
-make 2 channel
-send 2 goroutine to @child
-wait 1 of 2 channel send data
+make unbufferedChannel
+fork goroutine to child
+wait 1 s @main
 @child work
-print
+send data to channel
+@child goroutine is block until channel receive
+@main start receive
+@child goroutine continue
 end @main
 
 Channels
@@ -23,3 +28,10 @@ FIFO
 select statement
 The select statement lets a goroutine wait on multiple communication operations.
 A select blocks until one of its cases can run, then it executes that case. It chooses one at random if multiple are ready.
+
+## 3 concurrency patterns
+-- for-select loop
+-- done channel
+-- pipelines
+
+make channel without specific capacity  is unbuffered channel,that synchronize goroutine sender and receiver
