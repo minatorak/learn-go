@@ -4,3 +4,9 @@ go run concurrency/con.go
 1
 2
 hi
+
+stard @main
+fork gorountine someFunc to child
+print hi
+child work
+end @main
