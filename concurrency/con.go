@@ -1,26 +1,21 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	bufferedChannel := make(chan string, 1)
-	chars := []string{"a", "b", "c", "d", "e"}
+	charChannel := make(chan string, 3)
+	chars := []string{"a", "b", "c"}
 
-	go func() {
-		for _, c := range chars {
-			fmt.Println("goroutine sender ", c)
-			bufferedChannel <- c
+	for _, s := range chars {
+		select {
+		case charChannel <- s:
 		}
-	}()
-
-	n := len(chars)
-	for n >= 1 {
-		// time.Sleep(time.Second * 1)
-		fmt.Println("start receive")
-		receive := <-bufferedChannel
-		fmt.Println("receive ", receive)
-		n -= 1
 	}
+
+	close(charChannel)
+
+	for result := range charChannel {
+		fmt.Println(result)
+	}
+
 }
