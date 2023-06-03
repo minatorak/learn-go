@@ -1,12 +1,16 @@
 go run concurrency/con.go
 
-3
-1
-2
-hi
+// result
+dataTest
 
 stard @main
-fork gorountine someFunc to child
-print hi
+fork gorountine to child
+@main wait vale from channel or channel close
 child work
+gorountine send "dataTest" to channel
+msg recived data
+print msg
 end @main
+
+Channels
+FIFO

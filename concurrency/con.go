@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
-	"time"
 )
 
-func someFunc(num string) {
-	fmt.Println(num)
-}
 func main() {
-	go someFunc("1") // fork to child
-	go someFunc("2")
-	go someFunc("3")
+	myChannel := make(chan string) // make channel and data flow in channel is string
 
-	fmt.Println("hi")
-	time.Sleep(time.Second * 2)
+	go func() { // gorountine
+		myChannel <- "dataTest" // send "dataTest" to channel
+	}()
+
+	msg := <-myChannel // blocking line of code @main
+	// for read data from channel close or recived data from channel
+
+	fmt.Println(msg)
+
 }
