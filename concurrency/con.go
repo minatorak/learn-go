@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	unbufferedChannel := make(chan string)
+	unbufferedChannel := make(chan string, 0)
 	chars := []string{"a", "b", "c"}
 
 	go func() {
