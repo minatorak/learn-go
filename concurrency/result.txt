@@ -1,3 +1,6 @@
 go run concurrency/con.go
 
+3
+1
+2
 hi
