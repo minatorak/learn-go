@@ -1,25 +1,23 @@
 go run concurrency/con.go
 
 // result
+start receive
 goroutine sender  a
-start recive
-recive  a
 goroutine sender  b
-start recive
-recive  b
 goroutine sender  c
-start recive
-recive  c
+receive  a
+start receive
+receive  b
+start receive
+receive  c
+start receive
+goroutine sender  d
+goroutine sender  e
+receive  d
+start receive
+receive  e
 
 stard @main
-make unbufferedChannel
-fork goroutine to child
-wait 1 s @main
-@child work
-send data to channel
-@child goroutine is block until channel receive
-@main start receive
-@child goroutine continue
 end @main
 
 Channels
@@ -35,3 +33,4 @@ A select blocks until one of its cases can run, then it executes that case. It c
 -- pipelines
 
 make channel without specific capacity  is unbuffered channel,that synchronize goroutine sender and receiver
+bufferedChannel will not block goroutine sender until channel is full max
