@@ -1,23 +1,12 @@
 go run concurrency/con.go
 
 // result
-start receive
-goroutine sender  a
-goroutine sender  b
-goroutine sender  c
-receive  a
-start receive
-receive  b
-start receive
-receive  c
-start receive
-goroutine sender  d
-goroutine sender  e
-receive  d
-start receive
-receive  e
+Doing infinite work
+Doing infinite work
+after close done
 
 stard @main
+
 end @main
 
 Channels

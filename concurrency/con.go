@@ -1,21 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
-	charChannel := make(chan string, 3)
-	chars := []string{"a", "b", "c"}
+	done := make(chan bool)
 
-	for _, s := range chars {
+	go doWork(done)
+	time.Sleep(time.Second * 2)
+	close(done) // cancelled child goroutine
+	fmt.Println("after close done")
+	time.Sleep(time.Second * 5)
+}
+
+func doWork(done <-chan bool) {
+	for {
 		select {
-		case charChannel <- s:
+		case <-done:
+			return
+		default:
+			fmt.Println("Doing infinite work")
 		}
-	}
-
-	close(charChannel)
-
-	for result := range charChannel {
-		fmt.Println(result)
 	}
 
 }
