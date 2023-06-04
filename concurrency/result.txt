@@ -1,12 +1,26 @@
 go run concurrency/con.go
 
 // result
-Doing infinite work
-Doing infinite work
-after close done
+sliceToChannel  2
+sliceToChannel  3
+sq  2
+sq  3
+sliceToChannel  4
+4
+9
+sq  4
+16
+sliceToChannel  5
+sliceToChannel  7
+sq  5
+sq  7
+sliceToChannel  9
+25
+49
+sq  9
+81
 
 stard @main
-
 end @main
 
 Channels
@@ -23,3 +37,8 @@ A select blocks until one of its cases can run, then it executes that case. It c
 
 make channel without specific capacity  is unbuffered channel,that synchronize goroutine sender and receiver
 bufferedChannel will not block goroutine sender until channel is full max
+
+pipeline
+start -> thing 1(do something) -> thins 2 (do something)
+    (data)                     (data)
+
