@@ -26,13 +26,14 @@ func main() {
 		log.Fatal("Error:", err.Error())
 	}
 
-	githubConfig := flag.String("cc", "lura/configs/routers/github.json", "Path to config filename")
-	githubServiceConfig, err := parser.Parse(*githubConfig)
-	if err != nil {
-		log.Fatal("Error:", err.Error())
+	rotersConfig := readConfig()
+	for _, path := range rotersConfig {
+		router, err := parser.Parse(path)
+		if err != nil {
+			log.Fatal("Error:", err.Error())
+		}
+		serviceConfig.Endpoints = append(serviceConfig.Endpoints, router.Endpoints...)
 	}
-	serviceConfig.Endpoints = append(serviceConfig.Endpoints, githubServiceConfig.Endpoints...)
-
 	serviceConfig.Port = *port
 	engine := gin.Default()
 
