@@ -72,4 +72,6 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.47.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
+	github.com/MicahParks/keyfunc/v2 v2.1.0 // indirect
+	github.com/gofiber/contrib/jwt v1.0.1 // indirect
 )
