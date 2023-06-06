@@ -17,7 +17,6 @@ import (
 func main() {
 	port := flag.Int("p", 8080, "Port of the service")
 	logLevel := flag.String("l", "ERROR", "Logging Level")
-
 	configFile := flag.String("c", "lura/configs/config.json", "Path to config filename")
 
 	parser := config.NewParser()
@@ -27,11 +26,15 @@ func main() {
 		log.Fatal("Error:", err.Error())
 	}
 
+	githubConfig := flag.String("cc", "lura/configs/routers/github.json", "Path to config filename")
+	githubServiceConfig, err := parser.Parse(*githubConfig)
+	if err != nil {
+		log.Fatal("Error:", err.Error())
+	}
+	serviceConfig.Endpoints = append(serviceConfig.Endpoints, githubServiceConfig.Endpoints...)
+
 	serviceConfig.Port = *port
-	// serviceConfig.Endpoints = make([]*config.EndpointConfig, 0)
 	engine := gin.Default()
-	// engine.Use(emptyMiddleware())
-	engine.Use(authMiddleware())
 
 	logger, _ := logging.NewLogger(*logLevel, os.Stdout, "[LURA]")
 	routerFactory := lura.NewFactory(lura.Config{

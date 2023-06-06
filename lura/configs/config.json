@@ -60,23 +60,6 @@
             "cache_ttl": 3600
         },
         {
-            "endpoint": "/github",
-            "method": "GET",
-            "backend": [{
-                "host": [
-                    "https://api.github.com"
-                ],
-                "url_pattern": "/",
-                "allow": [
-                    "authorizations_url",
-                    "code_search_url"
-                ]
-            }],
-            "concurrent_calls": 2,
-            "timeout": "1000s",
-            "cache_ttl": 3600
-        },
-        {
             "endpoint": "/combination/{id}/{supu}",
             "method": "GET",
             "backend": [{
